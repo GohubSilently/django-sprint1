@@ -44,14 +44,18 @@ posts = [
     },
 ]
 
+posts_by_id = {
+    post['id']: post
+    for post in posts
+}
+
 
 def index(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
 
-def post_detail(request, id):
-    post = next(p for p in posts if p['id'] == id)
-    return render(request, 'blog/detail.html', {'post': post})
+def post_detail(request, post_id):
+    return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
 
 def category_posts(request, category_slug):
